@@ -1,0 +1,104 @@
+{
+  "common": {
+    "appName": "Freelancers Tunisiens de Pointe",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "viewMore": "Voir Plus",
+    "backToHome": "Retour à l'accueil",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "signup": "S'inscrire",
+    "profile": "Profil"
+  },
+  "nav": {
+    "home": "Accueil",
+    "jobs": "Parcourir les Emplois",
+    "postJob": "Publier un Emploi",
+    "dashboard": "Tableau de Bord",
+    "messages": "Messages",
+    "myJobs": "Mes Emplois",
+    "mySubmissions": "Mes Soumissions",
+    "howItWorks": "Comment ça Marche",
+    "about": "À Propos"
+  },
+  "auth": {
+    "welcomeBack": "Bon Retour",
+    "createAccount": "Créer un Compte",
+    "email": "Adresse Email",
+    "password": "Mot de Passe",
+    "confirmPassword": "Confirmer le Mot de Passe",
+    "fullName": "Nom Complet",
+    "phone": "Numéro de Téléphone",
+    "location": "Localisation",
+    "role": "Je veux",
+    "client": "Embaucher des Freelancers",
+    "freelancer": "Trouver du Travail",
+    "alreadyHaveAccount": "Vous avez déjà un compte?",
+    "dontHaveAccount": "Vous n'avez pas de compte?",
+    "forgotPassword": "Mot de passe oublié?"
+  },
+  "landing": {
+    "hero": {
+      "title": "Trouvez les Meilleurs Freelancers Tunisiens ou Gagnez de l'Argent",
+      "subtitle": "La plateforme de confiance connectant les freelancers talentueux avec les clients. Publiez des emplois gratuitement, payez uniquement lorsque vous êtes satisfait.",
+      "ctaClient": "Publier un Emploi Gratuitement",
+      "ctaFreelancer": "Trouver des Emplois et Commencer à Gagner"
+    },
+    "features": {
+      "title": "Pourquoi Nous Choisir?",
+      "freePosting": {
+        "title": "Publication Gratuite",
+        "description": "Les clients publient des emplois illimités gratuitement"
+      },
+      "securePayment": {
+        "title": "Paiements Sécurisés",
+        "description": "Protection par dépôt fiduciaire Stripe"
+      },
+      "aiMatch": {
+        "title": "Correspondance IA",
+        "description": "Recommandations d'emplois intelligentes"
+      },
+      "realTimeChat": {
+        "title": "Chat en Temps Réel",
+        "description": "Communiquez instantanément"
+      },
+      "multilingual": {
+        "title": "Support Multilingue",
+        "description": "Interface en arabe, français et anglais"
+      },
+      "zeroScams": {
+        "title": "Zéro Arnaque",
+        "description": "Payez uniquement après approbation du travail"
+      }
+    }
+  },
+  "jobs": {
+    "title": "Parcourir les Emplois",
+    "categories": "Catégories",
+    "budget": "Budget",
+    "deadline": "Date Limite",
+    "skills": "Compétences Requises",
+    "postedBy": "Publié Par",
+    "applicants": "Candidats",
+    "viewDetails": "Voir les Détails",
+    "submitWork": "Soumettre le Travail",
+    "noJobsFound": "Aucun emploi trouvé"
+  },
+  "dashboard": {
+    "welcome": "Bon retour",
+    "stats": {
+      "activeJobs": "Emplois Actifs",
+      "pendingSubmissions": "Soumissions en Attente",
+      "totalEarnings": "Gains Totaux",
+      "completedJobs": "Emplois Terminés"
+    }
+  }
+}

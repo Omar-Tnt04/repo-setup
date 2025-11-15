@@ -1,0 +1,104 @@
+{
+  "common": {
+    "appName": "أفضل المستقلين التونسيين",
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجاح",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "search": "بحث",
+    "filter": "تصفية",
+    "viewMore": "عرض المزيد",
+    "backToHome": "العودة إلى الصفحة الرئيسية",
+    "logout": "تسجيل الخروج",
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "profile": "الملف الشخصي"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "jobs": "تصفح الوظائف",
+    "postJob": "نشر وظيفة",
+    "dashboard": "لوحة التحكم",
+    "messages": "الرسائل",
+    "myJobs": "وظائفي",
+    "mySubmissions": "طلباتي",
+    "howItWorks": "كيف يعمل",
+    "about": "حول"
+  },
+  "auth": {
+    "welcomeBack": "مرحبا بعودتك",
+    "createAccount": "إنشاء حساب",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "fullName": "الاسم الكامل",
+    "phone": "رقم الهاتف",
+    "location": "الموقع",
+    "role": "أريد أن",
+    "client": "توظيف المستقلين",
+    "freelancer": "البحث عن عمل",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "forgotPassword": "نسيت كلمة المرور؟"
+  },
+  "landing": {
+    "hero": {
+      "title": "ابحث عن أفضل المستقلين التونسيين أو اكسب المال من مهاراتك",
+      "subtitle": "المنصة الموثوقة التي تربط المستقلين الموهوبين بالعملاء. انشر الوظائف مجانًا، ادفع فقط عندما تكون راضيًا.",
+      "ctaClient": "انشر وظيفة مجانًا",
+      "ctaFreelancer": "ابحث عن وظائف وابدأ الكسب"
+    },
+    "features": {
+      "title": "لماذا تختارنا؟",
+      "freePosting": {
+        "title": "نشر مجاني للوظائف",
+        "description": "ينشر العملاء وظائف غير محدودة دون تكلفة"
+      },
+      "securePayment": {
+        "title": "مدفوعات آمنة",
+        "description": "حماية الضمان بواسطة Stripe"
+      },
+      "aiMatch": {
+        "title": "مطابقة بالذكاء الاصطناعي",
+        "description": "توصيات ذكية بالوظائف للمستقلين"
+      },
+      "realTimeChat": {
+        "title": "دردشة فورية",
+        "description": "تواصل فوري مع العملاء والمستقلين"
+      },
+      "multilingual": {
+        "title": "دعم متعدد اللغات",
+        "description": "واجهة بالعربية والفرنسية والإنجليزية"
+      },
+      "zeroScams": {
+        "title": "صفر احتيال",
+        "description": "ادفع فقط بعد الموافقة على العمل المنجز"
+      }
+    }
+  },
+  "jobs": {
+    "title": "تصفح الوظائف",
+    "categories": "الفئات",
+    "budget": "الميزانية",
+    "deadline": "الموعد النهائي",
+    "skills": "المهارات المطلوبة",
+    "postedBy": "نشرت بواسطة",
+    "applicants": "المتقدمون",
+    "viewDetails": "عرض التفاصيل",
+    "submitWork": "إرسال العمل",
+    "noJobsFound": "لم يتم العثور على وظائف"
+  },
+  "dashboard": {
+    "welcome": "مرحبا بعودتك",
+    "stats": {
+      "activeJobs": "الوظائف النشطة",
+      "pendingSubmissions": "الطلبات المعلقة",
+      "totalEarnings": "إجمالي الأرباح",
+      "completedJobs": "الوظائف المكتملة"
+    }
+  }
+}

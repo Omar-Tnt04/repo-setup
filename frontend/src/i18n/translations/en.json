@@ -1,0 +1,104 @@
+{
+  "common": {
+    "appName": "Tunisian Top Freelancers",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "filter": "Filter",
+    "viewMore": "View More",
+    "backToHome": "Back to Home",
+    "logout": "Logout",
+    "login": "Login",
+    "signup": "Sign Up",
+    "profile": "Profile"
+  },
+  "nav": {
+    "home": "Home",
+    "jobs": "Browse Jobs",
+    "postJob": "Post a Job",
+    "dashboard": "Dashboard",
+    "messages": "Messages",
+    "myJobs": "My Jobs",
+    "mySubmissions": "My Submissions",
+    "howItWorks": "How It Works",
+    "about": "About"
+  },
+  "auth": {
+    "welcomeBack": "Welcome Back",
+    "createAccount": "Create Account",
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "location": "Location",
+    "role": "I want to",
+    "client": "Hire Freelancers",
+    "freelancer": "Find Work",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "forgotPassword": "Forgot Password?"
+  },
+  "landing": {
+    "hero": {
+      "title": "Find Top Tunisian Freelancers or Earn Money from Your Skills",
+      "subtitle": "The trusted platform connecting talented freelancers with clients. Post jobs for free, pay only when satisfied.",
+      "ctaClient": "Post a Job for Free",
+      "ctaFreelancer": "Find Jobs & Start Earning"
+    },
+    "features": {
+      "title": "Why Choose Us?",
+      "freePosting": {
+        "title": "Free Job Posting",
+        "description": "Clients post unlimited jobs at zero cost"
+      },
+      "securePayment": {
+        "title": "Secure Payments",
+        "description": "Stripe-powered escrow protection"
+      },
+      "aiMatch": {
+        "title": "AI-Powered Matching",
+        "description": "Smart job recommendations for freelancers"
+      },
+      "realTimeChat": {
+        "title": "Real-Time Chat",
+        "description": "Communicate instantly with clients/freelancers"
+      },
+      "multilingual": {
+        "title": "Multilingual Support",
+        "description": "Arabic, French, and English interface"
+      },
+      "zeroScams": {
+        "title": "Zero Scams",
+        "description": "Pay only after approving completed work"
+      }
+    }
+  },
+  "jobs": {
+    "title": "Browse Jobs",
+    "categories": "Categories",
+    "budget": "Budget",
+    "deadline": "Deadline",
+    "skills": "Skills Required",
+    "postedBy": "Posted By",
+    "applicants": "Applicants",
+    "viewDetails": "View Details",
+    "submitWork": "Submit Work",
+    "noJobsFound": "No jobs found"
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "stats": {
+      "activeJobs": "Active Jobs",
+      "pendingSubmissions": "Pending Submissions",
+      "totalEarnings": "Total Earnings",
+      "completedJobs": "Completed Jobs"
+    }
+  }
+}
