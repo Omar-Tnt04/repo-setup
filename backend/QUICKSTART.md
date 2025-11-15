@@ -32,7 +32,7 @@ cp .env.example .env
 
 Edit `.env` file:
 ```env
-MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>
+MONGODB_URI=mongodb+srv://YOUR_USER:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/tunisian_freelancers
 
 # Other variables (keep defaults or update)
 JWT_SECRET=your_secret_key_here

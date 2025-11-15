@@ -130,7 +130,7 @@ Example `.env`:
 ```env
 NODE_ENV=development
 PORT=5000
-MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>
+MONGODB_URI=mongodb+srv://myuser:mypass@cluster0.xxxxx.mongodb.net/tunisian_freelancers
 JWT_SECRET=your_secret_key
 STRIPE_SECRET_KEY=sk_test_...
 GEMINI_API_KEY=your_gemini_key

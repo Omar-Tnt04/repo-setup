@@ -12,7 +12,7 @@
 
 #### Environment Variables (`.env`)
 ```env
-MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/freelance_platform
 JWT_SECRET=your_jwt_secret_key_here
 STRIPE_SECRET_KEY=sk_test_your_stripe_key
 GEMINI_API_KEY=your_gemini_api_key

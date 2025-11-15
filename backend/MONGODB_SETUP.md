@@ -51,12 +51,12 @@ This backend now uses **MongoDB Atlas** (cloud-hosted MongoDB) instead of MySQL,
 1. Open `backend/.env` file
 2. Replace the placeholders in your connection string:
    ```env
-   MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.xxxxx.mongodb.net/<database>?retryWrites=true&w=majority
+   MONGODB_URI=mongodb+srv://adminUser:your_password@cluster0.xxxxx.mongodb.net/tunisian_freelancers?retryWrites=true&w=majority
    ```
    - Replace `<username>` with your database username
    - Replace `<password>` with your database password
    - Replace `<cluster>` with your cluster name
-   - Replace `<database>` with your database name (e.g., tunisian_freelancers)
+   - Add `/tunisian_freelancers` after `.net` to specify database name
 
 ---
 
