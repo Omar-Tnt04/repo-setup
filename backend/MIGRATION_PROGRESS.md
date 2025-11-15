@@ -214,7 +214,7 @@ const submission = await Submission.create({ job_id, freelancer_id, ... });
 
 3. **Update .env file**
    ```env
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/tunisian_freelancers
+   MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>
    ```
 
 4. **Migrate remaining controllers** (in order)
