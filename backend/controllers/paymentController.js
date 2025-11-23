@@ -1,93 +1,187 @@
-const { Payment, Submission, Job, User } = require('../models');
-const stripe = require('../config/stripe');
+const { Payment, Submission, Job, User, Transaction } = require('../models');
+// const stripe = require('../config/stripe'); // Keeping for reference, but using Mock PSPs
 
-// @desc    Create payment intent (Stripe)
-// @route   POST /api/payments/intent
+// Mock PSP Fee Configurations
+const PSP_FEES = {
+  konnect: 0.02, // 2%
+  paymee: 0.025, // 2.5%
+  paymaster: 0.02,
+  zitouna: 0.015,
+  gpg: 0.02,
+  stripe: 0.029
+};
+
+// @desc    Initiate Escrow Funding (Client deposits funds)
+// @route   POST /api/payments/fund-escrow
 // @access  Private (Client only)
-exports.createPaymentIntent = async (req, res, next) => {
+exports.fundEscrow = async (req, res, next) => {
   try {
-    if (req.user.role !== 'client') {
-      return res.status(403).json({
-        success: false,
-        message: 'Only clients can create payments'
-      });
+    const { job_id, provider = 'konnect' } = req.body;
+
+    const job = await Job.findById(job_id);
+    if (!job) {
+      return res.status(404).json({ success: false, message: 'Job not found' });
     }
 
-    const { submission_id, amount, currency = 'TND' } = req.body;
-
-    // Get submission
-    const submission = await Submission.findById(submission_id).populate('job_id');
-
-    if (!submission) {
-      return res.status(404).json({
-        success: false,
-        message: 'Submission not found'
-      });
+    if (job.client_id.toString() !== req.user.id) {
+      return res.status(403).json({ success: false, message: 'Not authorized' });
     }
 
-    // Verify client owns the job
-    if (submission.job_id.client_id.toString() !== req.user.id.toString()) {
-      return res.status(403).json({
-        success: false,
-        message: 'Not authorized to create payment for this submission'
-      });
+    if (job.escrow_status === 'funded') {
+      return res.status(400).json({ success: false, message: 'Escrow already funded' });
     }
 
-    // Verify submission is accepted
-    if (submission.status !== 'accepted') {
-      return res.status(400).json({
-        success: false,
-        message: 'Can only pay for accepted submissions'
-      });
-    }
+    // Calculate Fees
+    const amount = job.budget;
+    const processorFeeRate = PSP_FEES[provider] || 0.02;
+    const processorFee = amount * processorFeeRate;
+    const platformFee = 0; // 0% Commission Promise
+    const totalAmount = amount + processorFee;
 
-    // Check if payment already exists for this submission
-    const existingPayment = await Payment.findOne({ submission_id });
-
-    if (existingPayment) {
-      return res.status(400).json({
-        success: false,
-        message: 'Payment already exists for this submission'
-      });
-    }
-
-    // Create Stripe Payment Intent
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount * 100), // Convert to cents
-      currency: currency.toLowerCase(),
+    // Create Transaction Record
+    const transaction = await Transaction.create({
+      job_id: job._id,
+      sender_id: req.user.id,
+      amount: totalAmount,
+      currency: job.currency,
+      type: 'escrow_deposit',
+      status: 'pending',
+      provider: provider,
+      fees: {
+        platform_fee: platformFee,
+        processor_fee: processorFee
+      },
       metadata: {
-        submission_id: submission_id.toString(),
-        job_id: submission.job_id._id.toString(),
-        client_id: req.user.id.toString(),
-        freelancer_id: submission.freelancer_id.toString()
+        original_budget: amount
       }
     });
 
-    // Create payment record
-    const payment = await Payment.create({
-      submission_id,
-      job_id: submission.job_id._id,
-      client_id: req.user.id,
-      freelancer_id: submission.freelancer_id,
-      amount,
-      currency,
-      stripe_payment_intent_id: paymentIntent.id,
-      status: 'pending'
-    });
+    // Mock Payment Gateway Response
+    // In a real app, this would call Konnect/Paymee API to get a payment link
+    const mockPaymentUrl = `${process.env.CLIENT_URL || 'http://localhost:3000'}/payment/mock-gateway/${transaction._id}?provider=${provider}`;
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
-      message: 'Payment intent created successfully',
       data: {
-        payment_id: payment._id.toString(),
-        client_secret: paymentIntent.client_secret,
-        amount,
-        currency
+        transaction_id: transaction._id,
+        payment_url: mockPaymentUrl,
+        breakdown: {
+          budget: amount,
+          processor_fee: processorFee,
+          platform_fee: platformFee,
+          total: totalAmount
+        }
       }
     });
+
   } catch (error) {
     next(error);
   }
+};
+
+// @desc    Confirm Payment (Webhook/Mock Callback)
+// @route   POST /api/payments/confirm
+// @access  Private (or Public for webhooks)
+exports.confirmPayment = async (req, res, next) => {
+  try {
+    const { transaction_id, status } = req.body;
+
+    const transaction = await Transaction.findById(transaction_id);
+    if (!transaction) {
+      return res.status(404).json({ success: false, message: 'Transaction not found' });
+    }
+
+    if (transaction.status === 'completed') {
+      return res.status(200).json({ success: true, message: 'Already confirmed' });
+    }
+
+    if (status === 'success') {
+      transaction.status = 'completed';
+      transaction.provider_transaction_id = `mock_${Date.now()}`;
+      await transaction.save();
+
+      // Update Job Status
+      const job = await Job.findById(transaction.job_id);
+      job.escrow_status = 'funded';
+      job.status = 'open'; // Job is now live
+      job.payment_provider = transaction.provider;
+      await job.save();
+
+      // Create Notification for Client
+      // (Notification logic here)
+
+      return res.status(200).json({ success: true, data: transaction });
+    } else {
+      transaction.status = 'failed';
+      await transaction.save();
+      return res.status(400).json({ success: false, message: 'Payment failed' });
+    }
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Release Escrow (Client accepts work)
+// @route   POST /api/payments/release-escrow
+// @access  Private (Client only)
+exports.releaseEscrow = async (req, res, next) => {
+  try {
+    const { job_id, submission_id } = req.body;
+
+    const job = await Job.findById(job_id);
+    if (!job) return res.status(404).json({ success: false, message: 'Job not found' });
+
+    if (job.client_id.toString() !== req.user.id) {
+      return res.status(403).json({ success: false, message: 'Not authorized' });
+    }
+
+    if (job.escrow_status !== 'funded') {
+      return res.status(400).json({ success: false, message: 'Escrow not funded or already released' });
+    }
+
+    const submission = await Submission.findById(submission_id);
+    if (!submission) return res.status(404).json({ success: false, message: 'Submission not found' });
+
+    // Create Release Transaction
+    const transaction = await Transaction.create({
+      job_id: job._id,
+      sender_id: req.user.id, // Money moves from Escrow (technically Client's deposit)
+      receiver_id: submission.freelancer_id,
+      amount: job.budget, // Freelancer gets the full budget (0% fee)
+      currency: job.currency,
+      type: 'escrow_release',
+      status: 'completed', // Instant release in our system
+      provider: job.payment_provider,
+      fees: {
+        platform_fee: 0,
+        processor_fee: 0 // Already paid by client during deposit
+      }
+    });
+
+    // Update Job
+    job.escrow_status = 'released';
+    job.status = 'completed';
+    await job.save();
+
+    // Update Submission
+    submission.status = 'approved'; // 'accepted' -> 'approved' to match enum
+    await submission.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Escrow released successfully',
+      data: transaction
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Legacy / Placeholder for Stripe (if needed later)
+exports.createPaymentIntent = async (req, res, next) => {
+  res.status(501).json({ message: 'Use /fund-escrow instead' });
 };
 
 // @desc    Release payment (mark as completed)

@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
 
 // Pages
 import LandingPage from './pages/LandingPage';
@@ -19,14 +17,13 @@ import CreateJob from './pages/CreateJob';
 import Profile from './pages/Profile';
 import MessagesPage from './pages/MessagesPage';
 import NotFound from './pages/NotFound';
+import About from './pages/About';
+import MockPayment from './pages/MockPayment';
 
 // Components
-import Navbar from './components/common/Navbar';
-import Footer from './components/common/Footer';
+import { Layout } from './components/Layout';
+import Dashboard from './pages/Dashboard';
 import LoadingSpinner from './components/common/LoadingSpinner';
-
-// Initialize Stripe
-const stripePromise = loadStripe(import.meta.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || '');
 
 // Protected Route Component
 const ProtectedRoute = ({ children, allowedRoles }) => {
@@ -89,14 +86,16 @@ function AppContent() {
 
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
+      <Layout>
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<LandingPage />} />
+            <Route path="/dashboard-demo" element={<Dashboard />} />
             <Route path="/jobs" element={<JobsPage />} />
+            <Route path="/freelancers" element={<BrowseFreelancers />} />
             <Route path="/jobs/:id" element={<JobDetails />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/mock-payment/:transactionId" element={<MockPayment />} />
             
             {/* Auth Routes */}
             <Route
@@ -169,20 +168,16 @@ function AppContent() {
             {/* 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </main>
-        <Footer />
-      </div>
+      </Layout>
     </Router>
   );
 }
 
 function App() {
   return (
-    <Elements stripe={stripePromise}>
-      <AuthProvider>
-        <AppContent />
-      </AuthProvider>
-    </Elements>
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 

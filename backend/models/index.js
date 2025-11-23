@@ -5,5 +5,6 @@ module.exports = {
   Submission: require('./Submission'),
   Payment: require('./Payment'),
   Message: require('./Message'),
-  Notification: require('./Notification')
+  Notification: require('./Notification'),
+  Transaction: require('./Transaction')
 };

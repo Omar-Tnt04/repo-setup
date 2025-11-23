@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 
@@ -7,6 +7,8 @@ const Navbar = () => {
   const { t, i18n } = useTranslation();
   const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isLanding = location.pathname === '/';
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const changeLanguage = (lng) => {
@@ -19,8 +21,12 @@ const Navbar = () => {
     navigate('/');
   };
 
+  const navLinkClass = isLanding 
+    ? "text-gray-600 hover:text-finpay-teal transition-all hover-lift font-medium"
+    : "text-slate-300 hover:gradient-text transition-all hover-lift font-medium";
+
   return (
-    <nav className="glass-effect border-b border-cyan-500/20 sticky top-0 z-50 backdrop-blur-xl">
+    <nav className={`${isLanding ? 'bg-white/80 border-gray-100' : 'glass-effect border-cyan-500/20'} border-b sticky top-0 z-50 backdrop-blur-xl transition-colors duration-300`}>
       <div className="container-custom">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -30,20 +36,20 @@ const Navbar = () => {
               alt="Tunisian Top Freelancers" 
               className="w-16 h-16 md:w-20 md:h-20 object-contain transition-transform group-hover:scale-110 drop-shadow-lg"
             />
-            <span className="font-bold text-xl md:text-2xl gradient-text hidden sm:block">
+            <span className={`font-bold text-xl md:text-2xl hidden sm:block ${isLanding ? 'text-finpay-dark' : 'gradient-text'}`}>
               {t('common.appName')}
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link to="/jobs" className="text-slate-300 hover:gradient-text transition-all hover-lift font-medium">
+            <Link to="/jobs" className={navLinkClass}>
               {t('nav.jobs')}
             </Link>
             
             {isAuthenticated ? (
               <>
-                <Link to="/dashboard" className="text-slate-300 hover:gradient-text transition-all hover-lift font-medium">
+                <Link to="/dashboard" className={navLinkClass}>
                   {t('nav.dashboard')}
                 </Link>
                 {user?.role === 'admin' && (
@@ -51,7 +57,7 @@ const Navbar = () => {
                     Admin Panel
                   </Link>
                 )}
-                <Link to="/messages" className="text-slate-300 hover:gradient-text transition-all hover-lift font-medium relative">
+                <Link to="/messages" className={`${navLinkClass} relative`}>
                   {t('nav.messages')}
                   {/* Notification Badge Example */}
                   {/* <span className="absolute -top-1 -right-2 w-5 h-5 bg-gradient-to-br from-cyan-500 to-emerald-500 text-white text-xs rounded-full flex items-center justify-center animate-pulse-glow">3</span> */}
@@ -74,30 +80,30 @@ const Navbar = () => {
                       </span>
                     </div>
                   </Link>
-                  <button onClick={handleLogout} className="text-slate-300 hover:text-red-400 transition-colors hover-lift font-medium">
+                  <button onClick={handleLogout} className={`${isLanding ? 'text-gray-500 hover:text-red-500' : 'text-slate-300 hover:text-red-400'} transition-colors hover-lift font-medium`}>
                     {t('common.logout')}
                   </button>
                 </div>
               </>
             ) : (
               <>
-                <Link to="/login" className="text-slate-300 hover:gradient-text transition-all hover-lift font-medium">
+                <Link to="/login" className={navLinkClass}>
                   {t('common.login')}
                 </Link>
-                <Link to="/signup" className="btn-primary">
+                <Link to="/signup" className={isLanding ? "bg-finpay-teal text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all" : "btn-primary"}>
                   {t('common.signup')}
                 </Link>
               </>
             )}
 
             {/* Language Switcher */}
-            <div className="flex items-center space-x-1 border-l border-slate-600 pl-4">
+            <div className={`flex items-center space-x-1 border-l pl-4 ${isLanding ? 'border-gray-200' : 'border-slate-600'}`}>
               <button
                 onClick={() => changeLanguage('ar')}
                 className={`px-2 py-1 rounded text-sm transition-all ${
                   i18n.language === 'ar' 
                     ? 'bg-gradient-to-br from-cyan-500 to-emerald-500 text-white shadow-lg' 
-                    : 'text-slate-400 hover:bg-slate-700 hover-lift'
+                    : isLanding ? 'text-gray-400 hover:bg-gray-100' : 'text-slate-400 hover:bg-slate-700 hover-lift'
                 }`}
               >
                 ع

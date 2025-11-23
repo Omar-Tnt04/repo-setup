@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const {
-  createPaymentIntent,
-  releasePayment,
-  getPaymentHistory,
-  getPaymentById,
-  getPaymentStats
+  fundEscrow,
+  confirmPayment,
+  releaseEscrow,
+  createPaymentIntent // Legacy
 } = require('../controllers/paymentController');
 const { protect, authorize } = require('../middleware/auth');
 
-// Protected routes
-router.post('/intent', protect, authorize('client'), createPaymentIntent);
-router.put('/:id/release', protect, authorize('client'), releasePayment);
-router.get('/history', protect, getPaymentHistory);
-router.get('/stats', protect, getPaymentStats);
-router.get('/:id', protect, getPaymentById);
+// Escrow Routes
+router.post('/fund-escrow', protect, authorize('client'), fundEscrow);
+router.post('/confirm', protect, confirmPayment); // Can be public for webhooks, but protected for mock
+router.post('/release-escrow', protect, authorize('client'), releaseEscrow);
+
+// Legacy / Stats (To be implemented if needed)
+// router.get('/history', protect, getPaymentHistory);
 
 module.exports = router;

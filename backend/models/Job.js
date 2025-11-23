@@ -28,7 +28,18 @@ const jobSchema = new mongoose.Schema({
   },
   currency: {
     type: String,
+    enum: ['TND', 'EUR'],
     default: 'TND'
+  },
+  escrow_status: {
+    type: String,
+    enum: ['unfunded', 'funded', 'released', 'disputed', 'refunded'],
+    default: 'unfunded'
+  },
+  payment_provider: {
+    type: String,
+    enum: ['konnect', 'paymee', 'paymaster', 'zitouna', 'gpg', 'stripe'],
+    default: 'konnect'
   },
   deadline: {
     type: Date

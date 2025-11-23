@@ -7,6 +7,16 @@ export default {
   theme: {
     extend: {
       colors: {
+        neonBlue: '#3b82f6',
+        neonPurple: '#8b5cf6',
+        neonPink: '#ec4899',
+        neonOrange: '#f97316',
+        'finpay': {
+          teal: '#2A8E9E',
+          light: '#E9F3F4',
+          dark: '#180D39',
+          black: '#1D1E20',
+        },
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',
@@ -34,6 +44,23 @@ export default {
         success: '#10b981',
         warning: '#f59e0b',
         danger: '#ef4444',
+      },
+      animation: {
+        'blob': 'blob 7s infinite',
+        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        blob: {
+          '0%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' },
+        },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],

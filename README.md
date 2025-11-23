@@ -1,6 +1,71 @@
-# Tunisian Top Freelancers Platform
+# Tunisian Top Freelancers
 
-A secure, scalable freelance micro-job platform tailored for the Tunisian community, connecting freelancers and clients with zero upfront costs and secure escrow payments.
+**Tunisian Top Freelancers** is a secure freelance marketplace where clients (local and global) post jobs paid via legally-compliant Tunisian PSPs (Konnect, Paymee, PayMaster, Zitouna, GPGCheckout), in EUR or TND, using escrow. Freelancers submit their work (screenshots/files), and funds are released only when the client accepts — all on a 0% commission platform.
+
+## 🚀 Mission
+
+To provide a trusted, zero-commission platform for Tunisian freelancers to work with both local and international clients, backed by legal and secure Tunisian payment infrastructure.
+
+## 🎯 Target Users
+
+- **Clients**: Entrepreneurs, startups, agencies, SMEs around the world who want to utilize Tunisian talent.
+- **Freelancers**: Tunisian developers, designers, writers, translators, and professionals looking for remote paid work.
+
+## ✨ Core Features
+
+- **Job Posting**: Clients fill a form, choose budget in EUR or TND, and fund escrow using Konnect, Paymee, etc.
+- **Public Job Board**: All open jobs are listed publicly, filterable by category, currency, budget, and deadline.
+- **Submission System**: Freelancers upload screenshots, PDFs, ZIPs, or links to completed work.
+- **Payment & Escrow**: Funds are stored in escrow via PSPs; released when job is accepted.
+- **0% Platform Fee**: No fee for client or freelancer – clients pay exactly what they set, freelancers get everything (minus payment processor fee).
+- **Multi-Currency Support**: Show and accept EUR and TND, with real-time conversion display.
+
+## 💳 Payment & Escrow Infrastructure
+
+Integrates **Konnect, Paymee, PayMaster, Zitouna Payment / IZI, GPGCheckout**.
+
+**Payment flow:**
+1. Client posts job
+2. Client funds escrow via PSP
+3. Freelancer submits work
+4. Client accepts
+5. Escrow is released — freelancer is paid
+
+**Escrow policy**: Manual release by default, with optional auto-release after a configurable number of days.
+**Transparent fee handling**: Show processor fee to client at payment, clearly stating “Platform fee: 0%, Processor fee: …”.
+
+## ⚖️ Regulatory & Compliance
+
+- Business must be legally registered in Tunisia (or compatible jurisdiction).
+- KYC required for freelancer ID + client (especially for large amounts).
+- Store data securely (HTTPS, encryption).
+- Use PSPs that support holding funds (escrow).
+- Comply with foreign exchange / cross-border payment rules.
+- Provide Terms of Service, Privacy Policy, and Dispute Policy covering financial flows, refunds, and escrow.
+
+## 🛠 Technical Architecture
+
+- **Frontend**: React + Tailwind CSS
+- **Backend**: Node.js / Express
+- **Database**: MongoDB
+- **File Storage**: S3-compatible storage with virus scanning
+- **Payments**: Connect to Konnect, Paymee, PayMaster, etc. via their API / SDK
+- **Hosting**: Cloud provider (DigitalOcean / AWS / GCP)
+
+## 🛡 Trust & Dispute Mechanism
+
+- Clients can open disputes for incorrect or incomplete work.
+- **Admin reviews**: Job description, submission, metadata, conversation.
+- **Decisions**: Full refund, partial refund, resubmit, or release funds.
+- **Appeal**: One internal appeal allowed.
+
+## 📈 Launch Strategy
+
+1. **MVP phase**: Only core features + sandbox payments.
+2. **Onboard initial clients and freelancers manually**.
+3. **Use a landing page + outreach** (LinkedIn, FB, local communities).
+4. **Once critical mass**, launch for the public.
+5. **Monetize via premium/add-on services** — keep base 0% commission.
 
 ## 📚 CS324 Project Deliverables
 
@@ -41,7 +106,7 @@ This project was developed as part of CS324 course requirements. View detailed d
   - Stripe payment integration
   - Postman API testing
 
-## Features
+## Features (Legacy)
 
 - **Free Job Posting**: Clients post unlimited gigs at no cost
 - **Secure Payments**: Stripe integration with escrow protection
@@ -58,7 +123,7 @@ This project was developed as part of CS324 course requirements. View detailed d
 - **MongoDB Atlas** (Cloud Database)
 - **Mongoose ODM**
 - JWT Authentication
-- Stripe Payment Processing
+- **Tunisian PSP Integration** (Konnect, Paymee, etc.)
 - **REST API** (Pure Express endpoints)
 - Gemini AI API Integration
 
@@ -68,13 +133,12 @@ This project was developed as part of CS324 course requirements. View detailed d
 - Tailwind CSS
 - react-i18next (Multilingual)
 - Axios for API calls
-- Stripe Elements React
 
 ## Prerequisites
 
 - Node.js (v16 or higher)
 - **MongoDB Atlas Account** (Free tier available)
-- Stripe Account (for payment processing)
+- **Tunisian PSP Account** (Konnect/Paymee for payments)
 - Google AI Studio Account (for Gemini API key)
 
 ## Environment Variables
@@ -91,8 +155,9 @@ DB_PASSWORD=your_mysql_password
 DB_NAME=tunisian_freelancers
 JWT_SECRET=your_super_secret_jwt_key_change_this
 JWT_EXPIRE=7d
-STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
-STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
+# Payment Gateway Keys (Replace with your PSP keys)
+PSP_API_KEY=your_psp_api_key
+PSP_SECRET_KEY=your_psp_secret_key
 GEMINI_API_KEY=your_gemini_api_key
 CLIENT_URL=http://localhost:3000
 ```
