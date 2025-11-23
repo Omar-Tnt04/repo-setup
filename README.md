@@ -106,6 +106,13 @@ This project was developed as part of CS324 course requirements. View detailed d
   - Stripe payment integration
   - Postman API testing
 
+- ✅ **[Deliverable 6: Authentication & Authorization](docs/README_DELIVERABLE_6.md)**
+  - User registration and login implementation
+  - JWT authentication mechanisms (Token generation & verification)
+  - Protected routes middleware
+  - Role-based access control (RBAC) for User/Admin roles
+  - Authorization checks for privileged actions
+
 ## Features (Legacy)
 
 - **Free Job Posting**: Clients post unlimited gigs at no cost
